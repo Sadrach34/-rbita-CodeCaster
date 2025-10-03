@@ -1,0 +1,9 @@
+# Dependencias de Orbita-CodeCaster
+
+# Actualmente solo usa la biblioteca estándar de Python
+# Tkinter viene incluido con Python
+
+# Si en el futuro necesitas agregar dependencias externas, añádelas aquí
+# Por ejemplo:
+# pillow==10.0.0  # Para manejo de imágenes en Tkinter
+# ttkthemes==3.2.2  # Para temas adicionales de ttk
