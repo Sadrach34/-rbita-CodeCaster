@@ -4,12 +4,74 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
-}
+// Prisma schema para información ecológica por estado y estación del año
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgresql" // o "mysql" / "sqlite" según tu entorno
   url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ========================
+// MODELOS BASE
+// ========================
+
+model Estado {
+  id        Int      @id @default(autoincrement())
+  nombre    String   @unique
+  primavera Primavera[]
+  verano    Verano[]
+  otonio    Otonio[]
+  invierno  Invierno[]
+}
+
+// ========================
+// MODELOS POR ESTACIÓN
+// ========================
+
+model Primavera {
+  id                     Int      @id @default(autoincrement())
+  estadoId               Int
+  ecosistema             String
+  principalesPolinizadores String
+  plantasEnPeligro       String
+  areasVerdesPrincipales String
+  estado                 Estado   @relation(fields: [estadoId], references: [id])
+  createdAt              DateTime @default(now())
+}
+
+model Verano {
+  id                     Int      @id @default(autoincrement())
+  estadoId               Int
+  ecosistema             String
+  principalesPolinizadores String
+  plantasEnPeligro       String
+  areasVerdesPrincipales String
+  estado                 Estado   @relation(fields: [estadoId], references: [id])
+  createdAt              DateTime @default(now())
+}
+
+model Otonio {
+  id                     Int      @id @default(autoincrement())
+  estadoId               Int
+  ecosistema             String
+  principalesPolinizadores String
+  plantasEnPeligro       String
+  areasVerdesPrincipales String
+  estado                 Estado   @relation(fields: [estadoId], references: [id])
+  createdAt              DateTime @default(now())
+}
+
+model Invierno {
+  id                     Int      @id @default(autoincrement())
+  estadoId               Int
+  ecosistema             String
+  principalesPolinizadores String
+  plantasEnPeligro       String
+  areasVerdesPrincipales String
+  estado                 Estado   @relation(fields: [estadoId], references: [id])
+  createdAt              DateTime @default(now())
 }

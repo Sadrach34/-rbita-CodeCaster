@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": 1, "nombre": "Jalisco" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-104.0, 22.0],
+            [-103.0, 22.0],
+            [-103.0, 21.0],
+            [-104.0, 21.0],
+            [-104.0, 22.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": 2, "nombre": "Chiapas" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-93.0, 17.0],
+            [-92.0, 17.0],
+            [-92.0, 16.0],
+            [-93.0, 16.0],
+            [-93.0, 17.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": 3, "nombre": "Yucatán" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-90.0, 21.5],
+            [-89.0, 21.5],
+            [-89.0, 20.5],
+            [-90.0, 20.5],
+            [-90.0, 21.5]
+          ]
+        ]
+      }
+    }
+  ]
+}
