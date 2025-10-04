@@ -1,3 +1,12 @@
+# Entornos virtuales de Python
+mi_entorno/
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -205,3 +214,37 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ========================================
+# Configuración específica del proyecto
+# ========================================
+
+# Datos sensibles y archivos CSV
+.env
+.env.local
+*.csv
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.parquet
+*.db
+*.sqlite
+
+# Outputs generados (mapas, gráficos)
+data/output/*.html
+data/output/*.png
+data/output/*.jpg
+data/output/*.jpeg
+data/output/*.pdf
+!data/output/.gitkeep
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDEs adicionales
+*.sublime-project
+*.sublime-workspace
+
+# Carpetas antiguas del proyecto
+DatosCsv/
+python/floraciones_prototipo.html
