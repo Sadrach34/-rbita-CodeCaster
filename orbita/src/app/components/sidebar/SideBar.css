@@ -1,16 +1,38 @@
-/* Fondo oscuro que cubre la pantalla */
-.container-menu {
+/* === Fondo oscuro que cubre la pantalla === */
+.menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 16rem;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 40;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Contenedor del menú lateral === */
+.container-menu {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 25rem;
   height: 100vh;
-  background-image: linear-gradient(to top, #6627EA 50%, #764BA2  100%);
+  background-image: linear-gradient(to top, #6627EA 50%, #764BA2 100%);
   color: rgb(34, 33, 33);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 50;
   padding: 2rem 1rem;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Cuando está abierto */
@@ -18,56 +40,77 @@
   transform: translateX(0);
 }
 
-/* Contenido del menú */
+/* === Contenido del menú === */
 .cont-menu nav {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 .cont-menu nav a {
-  color: white;
+  color: #f0f0f0;
   text-decoration: none;
   font-size: 1.2rem;
-  transition: color 0.2s;
+  font-weight: 500;
+  transition: color 0.2s, transform 0.2s;
 }
 
 .cont-menu nav a:hover {
   color: #00aaff;
+  transform: translateX(5px);
 }
 
-/* Botón de abrir */
+/* === Botón de abrir === */
 .open-menu-btn {
   position: fixed;
   top: 1rem;
   left: 1rem;
   font-size: 2rem;
-  background: none;
+  background: rgba(255, 255, 255, 0.7);
   border: none;
-  color: rgb(12, 12, 12);
+  border-radius: 0.25rem;
+  color: #222;
   cursor: pointer;
   z-index: 100;
-  transition: opacity 0.3s ease;
+  padding: 0.3rem 0.6rem;
+  }
+
+.open-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
 }
 
-/* Botón de cerrar */
+/* === Botón de cerrar === */
 .close-menu {
-  font-size: 1rem;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   background: none;
   border: none;
-  color: rgb(0, 0, 0);
+  color: white;
   cursor: pointer;
-  display: block;
-  text-align: center;
-  height: 1rem;
-  width: auto;
-  line-height: 2rem;
-  border-radius: 50%
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
 }
 
+.close-menu:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
 
+.close-icon {
+  width: 2rem;
+  height: auto;
+}
 
+.logoSpace {
+  display: flex;
+  left: 1rem;
+  position: absolute;
+  top: 1rem;
+  width: 15rem;
+  height: auto;
+}

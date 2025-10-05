@@ -1,39 +1,49 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import "./SideBar.css";
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [submenuOpen, setSubmenuOpen] = useState(false);
 
   return (
     <>
+      {/* Fondo oscuro detrás del menú */}
+      {isOpen && (
+        <div
+          className="menu-overlay open"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        ></div>
+      )}
+
       {/* Botón hamburguesa */}
       {!isOpen && (
         <button
           className="open-menu-btn"
           onClick={() => setIsOpen(true)}
-          aria-label="Abrir menú"
+          aria-label="Abrir menú lateral"
+          aria-expanded={isOpen}
         >
           ☰
         </button>
       )}
 
       {/* Sidebar */}
-      <div className={`container-menu ${isOpen ? "open" : ""}`} aria-hidden={!isOpen}>
-          {/* Botón cerrar */}
-          <button className="close-menu" onClick={() => setIsOpen(false)}>
-            <img src="/close.png" alt="close button" />
-          </button>
-        <div className="cont-menu" role="dialog" aria-label="Menú lateral">
-          <nav>
-            <a href="/Biografia">Biografía</a>
-            <a href="/Habilidades">Habilidades</a>
+      <aside
+        className={`container-menu ${isOpen ? "open" : ""}`}
+        aria-hidden={!isOpen}
+      >
+        <img className="logoSpace" src="/logo.png" alt="logo SpaceApps" />
+        <button
+          className="close-menu"
+          onClick={() => setIsOpen(false)}
+          aria-label="Cerrar menú lateral"
+        >
+          <img className="close-icon" src="/close.png" alt="Cerrar menú" />
+        </button>
 
-            <a href="/Portafolio">Portafolio</a>
-          </nav>
-        </div>
-      </div>
+      </aside>
     </>
   );
 }
