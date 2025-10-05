@@ -56,6 +56,27 @@ python -c "import folium; print('✅ Folium instalado correctamente')"
 
 ## 🎯 Uso Rápido
 
+### ⚡ Análisis Completo (Recomendado)
+
+Ejecuta el análisis completo de todos los datos con un solo comando:
+
+```bash
+python main.py
+```
+
+**Esto generará automáticamente:**
+- 📄 Reporte completo en TXT con todas las estadísticas
+- 🗺️ Mapa interactivo de mosquitos (HeatMap + Clusters)
+- 🌍 Mapa interactivo de cobertura del suelo
+- 📊 Gráficos de análisis
+- 🤖 Modelo predictivo con Random Forest
+
+**Archivos generados en:** `data/output/reporte_completo_*.txt` y `mapa_*.html`
+
+[📖 Ver guía completa de uso](docs/USO_MAIN.md)
+
+---
+
 ### Generar Mapa de Floraciones
 
 ```bash
@@ -63,7 +84,6 @@ python scripts/generar_mapa_floraciones.py
 ```
 
 Esto creará un archivo HTML en `data/output/floraciones.html` con:
-
 - Mapa base de México
 - Capa de NDVI satelital de NASA GIBS
 - Marcadores de detecciones de floración
