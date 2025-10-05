@@ -91,7 +91,7 @@ class AnalizadorCobertura:
         output_path = Path('data/output/promedio_cobertura_suelo.png')
         output_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return promedios
@@ -141,7 +141,7 @@ class AnalizadorCobertura:
         # Guardar
         output_path = Path('data/output/distribucion_cobertura.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"✅ Gráfico de distribución guardado: {output_path}")
+        print(f" Gráfico de distribución guardado: {output_path}")
         plt.close()
         
         return columnas_existentes
@@ -190,7 +190,7 @@ class AnalizadorCobertura:
         # Guardar
         output_path = Path('data/output/areas_con_agua.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return areas_con_agua
@@ -230,7 +230,7 @@ class AnalizadorCobertura:
         # Guardar
         output_path = Path('data/output/correlaciones_cobertura.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Heatmap de correlación guardado: {output_path}")
+        print(f"\n Heatmap de correlación guardado: {output_path}")
         plt.close()
         
         return correlaciones
@@ -294,7 +294,7 @@ class AnalizadorCobertura:
         # Guardar
         output_path = Path('data/output/vegetacion_vs_urbano.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico comparativo guardado: {output_path}")
+        print(f"\n Gráfico comparativo guardado: {output_path}")
         plt.close()
         
         return {'vegetacion': vegetacion_promedio, 'urbano': urbano_promedio}
@@ -332,7 +332,7 @@ class AnalizadorCobertura:
         self.analizar_vegetacion_urbano()
         self.resumen_completo()
         
-        print("\n✅ ANÁLISIS DE COBERTURA COMPLETO FINALIZADO")
+        print("\n ANÁLISIS DE COBERTURA COMPLETO FINALIZADO")
         print("📁 Revisa la carpeta 'data/output/' para ver los resultados\n")
         
         return self.resultados

@@ -499,7 +499,7 @@ class GeneradorReportes:
     
     def crear_mapa_unificado(self, df_mosquitos, df_imagery, df_landcover):
         """
-        Crea un mapa unificado con todos los datos: mosquitos, cobertura y plantas.
+        Crea un mapa con todos los datos: mosquitos, cobertura y plantas.
         
         Args:
             df_mosquitos: DataFrame con datos de mosquitos
@@ -509,7 +509,7 @@ class GeneradorReportes:
         Returns:
             Ruta del archivo HTML generado
         """
-        self.separador("GENERANDO MAPA UNIFICADO")
+        self.separador("GENERANDO MAPA")
         
         # Calcular centro global basado en todos los datos
         todas_lats = []
@@ -547,9 +547,9 @@ class GeneradorReportes:
         
         centro_lat = sum(todas_lats) / len(todas_lats)
         centro_lon = sum(todas_lons) / len(todas_lons)
-        
-        self.log(f"Centro del mapa unificado: ({centro_lat:.4f}, {centro_lon:.4f})")
-        
+
+        self.log(f"Centro del mapa: ({centro_lat:.4f}, {centro_lon:.4f})")
+
         # Crear mapa base
         mapa = folium.Map(
             location=[centro_lat, centro_lon],
@@ -802,7 +802,7 @@ class GeneradorReportes:
         archivo_html = self.output_dir / "mapa.html"
         mapa.save(str(archivo_html))
         
-        self.log(f"✅ Mapa guardado: {archivo_html}")
+        self.log(f" Mapa guardado: {archivo_html}")
         self.reporte_txt.append(f"\n Mapa interactivo: {archivo_html}\n")
         self.reporte_txt.append(f"   Centro: ({centro_lat:.4f}, {centro_lon:.4f})\n")
         self.reporte_txt.append(f"   📊 Capas incluidas:\n")
@@ -928,10 +928,10 @@ def main():
             import traceback
             traceback.print_exc()
         
-        # 5. GENERAR MAPA UNIFICADO
-        generador.separador("5. GENERANDO MAPA UNIFICADO")
+        # 5. GENERAR MAPA
+        generador.separador("5. GENERANDO MAPA")
         
-        # Solo generar el mapa unificado (los 3 en 1)
+        # Solo generar el mapa (los 3 en 1)
         mapa_unificado = generador.crear_mapa_unificado(df_mosquitos, df_imagery, df_landcover)
         
         # 6. GENERAR REPORTE HTML INTERACTIVO
@@ -1084,7 +1084,7 @@ def main():
         generador.reporte_txt.append("\n" + "=" * 80 + "\n")
         generador.reporte_txt.append("  📋 RESUMEN FINAL\n")
         generador.reporte_txt.append("=" * 80 + "\n")
-        generador.reporte_txt.append(f"\n✅ Análisis completado exitosamente\n")
+        generador.reporte_txt.append(f"\n Análisis completado exitosamente\n")
         generador.reporte_txt.append(f"📅 Fecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         generador.reporte_txt.append(f"\n📁 Archivos generados:\n")
         generador.reporte_txt.append(f"   - 🌟 Mapa Central: mapa.html\n")

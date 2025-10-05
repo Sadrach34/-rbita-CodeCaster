@@ -117,7 +117,7 @@ class PredictorMosquitos:
         
         print("\n🔄 Entrenando modelo...")
         self.modelo.fit(self.X_train, self.y_train)
-        print("✅ Modelo entrenado exitosamente")
+        print(" Modelo entrenado exitosamente")
         
         # Evaluar en conjunto de entrenamiento
         train_score = self.modelo.score(self.X_train, self.y_train)
@@ -196,7 +196,7 @@ class PredictorMosquitos:
         output_path = Path('data/output/importancia_features.png')
         output_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return importancias
@@ -235,7 +235,7 @@ class PredictorMosquitos:
         
         output_path = Path('data/output/matriz_confusion.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Matriz de confusión guardada: {output_path}")
+        print(f"\n Matriz de confusión guardada: {output_path}")
         plt.close()
         
         # Curva ROC
@@ -257,7 +257,7 @@ class PredictorMosquitos:
         
         output_path = Path('data/output/curva_roc.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"✅ Curva ROC guardada: {output_path}")
+        print(f" Curva ROC guardada: {output_path}")
         plt.close()
         
         self.resultados['roc_auc'] = roc_auc
@@ -336,7 +336,7 @@ class PredictorMosquitos:
         self.evaluar_modelo()
         self.resumen_completo()
         
-        print("\n✅ ANÁLISIS PREDICTIVO COMPLETO FINALIZADO")
+        print("\n ANÁLISIS PREDICTIVO COMPLETO FINALIZADO")
         print("📁 Revisa la carpeta 'data/output/' para ver los resultados\n")
         
         return self.resultados

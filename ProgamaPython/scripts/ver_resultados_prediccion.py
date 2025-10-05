@@ -54,11 +54,11 @@ def mostrar_reporte():
     img_comp = output_dir / "prediccion_comparacion.png"
     
     if img_series.exists():
-        print(f"\n✅ Series temporales: {img_series}")
+        print(f"\n Series temporales: {img_series}")
         print(f"   Tamaño: {img_series.stat().st_size / 1024:.1f} KB")
     
     if img_comp.exists():
-        print(f"\n✅ Comparación: {img_comp}")
+        print(f"\n Comparación: {img_comp}")
         print(f"   Tamaño: {img_comp.stat().st_size / 1024:.1f} KB")
     
     print("\n" + "=" * 80)

@@ -54,7 +54,7 @@ class AnalizadorMosquitos:
         output_path = Path('data/output/especies_mosquitos.png')
         output_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return especies
@@ -86,7 +86,7 @@ class AnalizadorMosquitos:
         # Guardar
         output_path = Path('data/output/fuentes_agua_mosquitos.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return fuentes
@@ -128,7 +128,7 @@ class AnalizadorMosquitos:
         # Guardar
         output_path = Path('data/output/reportes_mensuales_mosquitos.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-        print(f"\n✅ Gráfico guardado: {output_path}")
+        print(f"\n Gráfico guardado: {output_path}")
         plt.close()
         
         return reportes_mensuales
@@ -221,7 +221,7 @@ class AnalizadorMosquitos:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         mapa.save(output_path)
         
-        print(f"\n✅ Mapa de calor guardado: {output_path}")
+        print(f"\n Mapa de calor guardado: {output_path}")
         
         return mapa
     
@@ -287,7 +287,7 @@ class AnalizadorMosquitos:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         mapa.save(output_path)
         
-        print(f"✅ Mapa con marcadores guardado: {output_path}")
+        print(f" Mapa con marcadores guardado: {output_path}")
         
         return mapa
     
@@ -328,7 +328,7 @@ class AnalizadorMosquitos:
         self.crear_mapa_marcadores()
         self.resumen_completo()
         
-        print("\n✅ ANÁLISIS COMPLETO FINALIZADO")
+        print("\n ANÁLISIS COMPLETO FINALIZADO")
         print("📁 Revisa la carpeta 'data/output/' para ver los resultados\n")
         
         return self.resultados

@@ -98,7 +98,7 @@ class DetectorFloraciones:
         
         # Guardar
         self.mapa.save(ruta_salida)
-        print(f"✅ Mapa generado: {ruta_salida}")
+        print(f" Mapa generado: {ruta_salida}")
         return ruta_salida
 
 

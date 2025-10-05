@@ -188,9 +188,9 @@ def generar_reporte_completo():
     
     ruta_html = reporte.generar_html("data/output/reporte_prediccion_temporal.html")
     
-    print("\n" + "✅" * 40)
-    print("✅ REPORTE HTML GENERADO EXITOSAMENTE")
-    print("✅" * 40)
+    print("\n" + "" * 40)
+    print(" REPORTE HTML GENERADO EXITOSAMENTE")
+    print("" * 40)
     print(f"\n📄 Archivo generado: {ruta_html}")
     print(f"🌐 Abre el archivo en tu navegador para ver el reporte interactivo")
     print(f"\n💡 Comando para abrir:")

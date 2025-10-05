@@ -80,7 +80,7 @@ class PredictorTemporal:
             self.df_temporal['fecha'] - fecha_inicio
         ).dt.total_seconds() / 86400
         
-        print(f"\n✅ Datos cargados exitosamente")
+        print(f"\n Datos cargados exitosamente")
         print(f"   Periodo: {self.df_temporal['fecha'].min().date()} a {self.df_temporal['fecha'].max().date()}")
         print(f"   Total de observaciones: {len(self.df_temporal)}")
         
@@ -146,7 +146,7 @@ class PredictorTemporal:
         output_path = Path('data/output/series_temporales.png')
         output_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor='white')
-        print(f"✅ Gráfico guardado: {output_path}")
+        print(f" Gráfico guardado: {output_path}")
         
         self.figuras.append(('series_temporales', fig))
         return fig
@@ -211,7 +211,7 @@ class PredictorTemporal:
         
         self.predicciones = pd.DataFrame(predicciones_futuras)
         
-        print(f"\n✅ Modelos entrenados y predicciones generadas")
+        print(f"\n Modelos entrenados y predicciones generadas")
         print(f"   Predicciones hasta: {fechas_futuras[-1].date()}")
         
         return True
@@ -271,7 +271,7 @@ class PredictorTemporal:
         
         output_path = Path('data/output/predicciones_temporales.png')
         plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor='white')
-        print(f"✅ Gráfico guardado: {output_path}")
+        print(f" Gráfico guardado: {output_path}")
         
         self.figuras.append(('predicciones', fig))
         return fig
@@ -336,7 +336,7 @@ class PredictorTemporal:
         
         output_path = Path('data/output/analisis_cambios.png')
         plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor='white')
-        print(f"✅ Gráfico guardado: {output_path}")
+        print(f" Gráfico guardado: {output_path}")
         
         self.figuras.append(('cambios', fig))
         return cambios, fig
@@ -363,7 +363,7 @@ class PredictorTemporal:
         
         output_csv = Path('data/output/predicciones_futuras.csv')
         self.predicciones.to_csv(output_csv, index=False)
-        print(f"\n✅ Predicciones guardadas en: {output_csv}")
+        print(f"\n Predicciones guardadas en: {output_csv}")
         
         return {
             'fecha_inicio': fecha_inicio,
@@ -390,9 +390,9 @@ class PredictorTemporal:
         self.analisis_cambios()
         resumen = self.generar_reporte_resumen()
         
-        print("\n" + "✅" * 35)
-        print("✅ ANÁLISIS COMPLETADO EXITOSAMENTE")
-        print("✅" * 35)
+        print("\n" + "" * 35)
+        print(" ANÁLISIS COMPLETADO EXITOSAMENTE")
+        print("" * 35)
         print("\n📁 Revisa la carpeta 'data/output/' para ver todos los resultados\n")
         
         return resumen

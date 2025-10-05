@@ -451,7 +451,7 @@ class GeneradorReporteHTML:
         with open(ruta_salida, 'w', encoding='utf-8') as f:
             f.write(html)
         
-        print(f"✅ Reporte HTML generado: {ruta_salida}")
+        print(f" Reporte HTML generado: {ruta_salida}")
         return ruta_salida
     
     def _generar_html_metricas(self):

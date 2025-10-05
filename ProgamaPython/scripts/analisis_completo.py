@@ -100,7 +100,7 @@ def main():
         # =============================================
         elapsed_time = time.time() - start_time
         
-        print_section("✅ ANÁLISIS COMPLETO FINALIZADO")
+        print_section(" ANÁLISIS COMPLETO FINALIZADO")
         
         print(f"⏱️  Tiempo total de ejecución: {elapsed_time:.2f} segundos\n")
         
@@ -168,7 +168,7 @@ def analizar_relaciones(df_mosquitos, df_imagery):
     print(f"   • La vegetación puede proporcionar refugio y sombra")
     print(f"   • Las superficies impermeables pueden crear charcos de agua estancada")
     
-    print("\n✅ Análisis de relaciones completado\n")
+    print("\n Análisis de relaciones completado\n")
 
 
 if __name__ == "__main__":
