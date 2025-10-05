@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 from datetime import datetime
 import warnings
+import shutil
 warnings.filterwarnings('ignore')
 
 # Configure matplotlib to use non-interactive backend before any other imports
@@ -719,7 +720,7 @@ class GeneradorReportes:
         # Leyenda completa
         leyenda_html = """
         <div style="position: fixed; 
-                    bottom: 50px; right: 50px; 
+                    bottom: 50px; left: 50px; 
                     width: 240px; max-height: 500px;
                     overflow-y: auto;
                     background-color: white; 
@@ -753,45 +754,39 @@ class GeneradorReportes:
         
         # Título con botón al reporte
         titulo_html = """
-        <div style="position: fixed; 
-                    top: 10px; left: 50px; 
-                    width: 500px; height: auto; 
-                    background-color: rgba(255, 255, 255, 0.95); 
-                    border:3px solid #1976D2;
-                    border-radius: 8px;
-                    z-index:9999; 
-                    font-size:14px;
-                    padding: 12px;
-                    text-align: center;
-                    box-shadow: 0 0 15px rgba(0,0,0,0.3);">
-            <h3 style="margin: 0; color: #1976D2;">🌍 Mapa - Orbita CodeCaster</h3>
-            <p style="margin: 5px 0; font-size: 11px; color: #666;">
-                Mosquitos 🦟 | Cobertura del Suelo 🌍 | Vegetación 🌿
-            </p>
-            <p style="margin: 5px 0; font-size: 10px; color: #999;">
-                Usa el control de capas para mostrar/ocultar datos
-            </p>
-            <a href="reporte.html" target="_blank" 
-               style="display: inline-block; 
-                      margin-top: 8px; 
-                      padding: 8px 16px; 
-                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                      color: white; 
-                      text-decoration: none; 
-                      border-radius: 5px;
-                      font-weight: bold;
-                      font-size: 12px;
-                      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                      transition: transform 0.2s;">
-                📊 Ver Reporte Detallado
-            </a>
-        </div>
-        <style>
-        a[href="reporte.html"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-        </style>
+
+<div style="position: fixed;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 480px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            z-index: 9999;
+            font-size: 14px;
+            padding: 16px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);">
+    <h3 style="margin: 0; 
+               color: white; 
+               font-size: 18px;
+               font-weight: 600;
+               text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+        🌍 Mapa Unificado - Orbita CodeCaster
+    </h3>
+    <p style="margin: 8px 0 0 0; 
+              font-size: 12px; 
+              color: rgba(255,255,255,0.95);
+              font-weight: 500;">
+        Mosquitos 🦟 | Cobertura del Suelo 🌍 | Vegetación 🌿
+    </p>
+    <p style="margin: 4px 0 0 0; 
+              font-size: 10px; 
+              color: rgba(255,255,255,0.8);">
+        Usa el control de capas para mostrar/ocultar datos
+    </p>
+</div>
         """
         mapa.get_root().html.add_child(folium.Element(titulo_html))
         
@@ -812,6 +807,61 @@ class GeneradorReportes:
         self.reporte_txt.append(f"      - Mapas de calor: 2 capas\n")
         
         return archivo_html
+    
+    def copiar_archivos_a_orbita(self):
+        """
+        Copia los archivos generados a la carpeta public/data de Orbita.
+        
+        Returns:
+            bool: True si la copia fue exitosa, False en caso contrario
+        """
+        self.separador("COPIANDO ARCHIVOS A ORBITA")
+        
+        # Ruta destino en Orbita
+        orbita_dir = Path(__file__).parent.parent / "orbita" / "public" / "data"
+        
+        # Verificar que existe el directorio
+        if not orbita_dir.exists():
+            self.log(f"⚠️ El directorio {orbita_dir} no existe", "WARNING")
+            return False
+        
+        self.log(f"Directorio destino: {orbita_dir}")
+        
+        archivos_copiados = 0
+        archivos_errores = 0
+        
+        # Listar archivos a copiar (excluir .gitkeep y archivos temporales)
+        extensiones_validas = ['.html', '.png', '.csv', '.txt']
+        
+        for archivo in self.output_dir.iterdir():
+            # Saltar si es directorio o .gitkeep
+            if archivo.is_dir() or archivo.name == '.gitkeep':
+                continue
+            
+            # Verificar extensión
+            if archivo.suffix in extensiones_validas:
+                try:
+                    destino = orbita_dir / archivo.name
+                    shutil.copy2(archivo, destino)
+                    self.log(f"✓ Copiado: {archivo.name}")
+                    archivos_copiados += 1
+                except Exception as e:
+                    self.log(f"✗ Error copiando {archivo.name}: {str(e)}", "ERROR")
+                    archivos_errores += 1
+        
+        self.log(f"\n📦 Resumen de copia:")
+        self.log(f"   ✓ Archivos copiados exitosamente: {archivos_copiados}")
+        if archivos_errores > 0:
+            self.log(f"   ✗ Archivos con errores: {archivos_errores}", "WARNING")
+        
+        self.reporte_txt.append(f"\n📦 COPIA A ORBITA:\n")
+        self.reporte_txt.append("-" * 80 + "\n")
+        self.reporte_txt.append(f"   Destino: {orbita_dir}\n")
+        self.reporte_txt.append(f"   Archivos copiados: {archivos_copiados}\n")
+        if archivos_errores > 0:
+            self.reporte_txt.append(f"   Archivos con errores: {archivos_errores}\n")
+        
+        return archivos_errores == 0
 
 
 def main():
@@ -1094,6 +1144,9 @@ def main():
         
         archivo_reporte = generador.guardar_reporte_txt()
         
+        # 8. COPIAR ARCHIVOS A ORBITA
+        exito_copia = generador.copiar_archivos_a_orbita()
+        
         # MENSAJE FINAL
         print("\n" + "=" * 80)
         print(" ANÁLISIS COMPLETADO EXITOSAMENTE")
@@ -1126,6 +1179,16 @@ def main():
         print("   • Usa el botón 'Ver Reporte Completo' para estadísticas detalladas")
         print("   • Los archivos HTML son autocontenidos - compártelos por email")
         print("   • Usa Ctrl+P en el navegador para exportar a PDF")
+        
+        if exito_copia:
+            print("\n📦 INTEGRACIÓN CON ORBITA:")
+            print("   ✓ Archivos copiados exitosamente a orbita/public/data/")
+            print("   • Ahora puedes acceder a estos archivos desde tu app Next.js")
+            print("   • Ruta: /data/mapa.html, /data/reporte.html, etc.")
+        else:
+            print("\n⚠️  NOTA: No se pudieron copiar archivos a Orbita")
+            print("   • Verifica que la carpeta orbita/public/data/ existe")
+        
         print("=" * 80 + "\n")
         
     except Exception as e:

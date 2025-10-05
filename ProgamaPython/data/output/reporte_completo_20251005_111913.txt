@@ -6,9 +6,9 @@
 ================================================================================
   1. CARGANDO DATOS
 ================================================================================
-[08:43:15] INFO: Datos de mosquitos: 534 registros
-[08:43:15] INFO: Datos de imagery: 1800 registros
-[08:43:15] INFO: Datos de cobertura terrestre (plantas): 1047 registros
+[11:19:14] INFO: Datos de mosquitos: 534 registros
+[11:19:14] INFO: Datos de imagery: 1800 registros
+[11:19:14] INFO: Datos de cobertura terrestre (plantas): 1047 registros
 
 ================================================================================
   2. ANÁLISIS DE MOSQUITOS
@@ -33,7 +33,7 @@
    - puddle or still water next to a creek, stream or river: 21 reportes
    - animal trough or water bowl: 12 reportes
    - puddle, vehhicle or animal tracks: 10 reportes
-[08:43:15] INFO: Analizando datos temporales...
+[11:19:14] INFO: Analizando datos temporales...
 
 📅 Reportes por mes:
    Mes 6: 292 reportes
@@ -51,7 +51,7 @@
    ceoBuilding: 12.45%
    ceoImperviousSurface: 19.57%
    ceoWaterLakePondedContainer: 0.99%
-[08:43:16] INFO: Análisis de cobertura completado
+[11:19:14] INFO: Análisis de cobertura completado
 
 ================================================================================
   4. MODELO PREDICTIVO
@@ -62,7 +62,7 @@
    Precisión del modelo: 100.00%
    Algoritmo: Random Forest
    Variable objetivo: Presencia de agua
-[08:43:16] INFO: Modelo entrenado con precisión: 100.00%
+[11:19:14] INFO: Modelo entrenado con precisión: 100.00%
 
 ================================================================================
   4B. PREDICCIÓN TEMPORAL A 2 MESES
@@ -80,7 +80,7 @@
       • water_pct: R² = 0.5784 (Aceptable)
       • cloud_cover: R² = 0.0424 (Aceptable)
       • snow_ice_pct: R² = 1.0000 (Excelente)
-[08:43:22] INFO:  Predicción temporal completada
+[11:19:20] INFO:  Predicción temporal completada
 
 ================================================================================
   5. GENERANDO MAPA
@@ -89,18 +89,18 @@
 ================================================================================
   GENERANDO MAPA
 ================================================================================
-[08:43:22] INFO: Centro del mapa: (35.3750, -92.3905)
-[08:43:22] INFO: Agregando capa de mosquitos...
-[08:43:22] INFO: Agregando capa de cobertura del suelo...
-[08:43:22] INFO: Agregando capa de plantas y vegetación...
-[08:43:22] INFO:   - Trees: 88 puntos
-[08:43:22] INFO:   - Shrubs: 2 puntos
-[08:43:22] INFO:   - Herbaceous: 76 puntos
-[08:43:22] INFO:   - Urban: 202 puntos
-[08:43:22] INFO:   - Barren: 14 puntos
-[08:43:22] INFO:   - Water: 4 puntos
-[08:43:22] INFO:   - Other: 661 puntos
-[08:43:24] INFO:  Mapa guardado: data/output/mapa.html
+[11:19:20] INFO: Centro del mapa: (35.3750, -92.3905)
+[11:19:20] INFO: Agregando capa de mosquitos...
+[11:19:20] INFO: Agregando capa de cobertura del suelo...
+[11:19:20] INFO: Agregando capa de plantas y vegetación...
+[11:19:20] INFO:   - Trees: 88 puntos
+[11:19:20] INFO:   - Shrubs: 2 puntos
+[11:19:20] INFO:   - Herbaceous: 76 puntos
+[11:19:20] INFO:   - Urban: 202 puntos
+[11:19:20] INFO:   - Barren: 14 puntos
+[11:19:20] INFO:   - Water: 4 puntos
+[11:19:20] INFO:   - Other: 661 puntos
+[11:19:22] INFO:  Mapa guardado: data/output/mapa.html
 
  Mapa interactivo: data/output/mapa.html
    Centro: (35.3750, -92.3905)
@@ -113,9 +113,9 @@
 ================================================================================
   6. GENERANDO REPORTE HTML INTERACTIVO
 ================================================================================
-[08:43:24] INFO: Creando reporte HTML con todas las visualizaciones...
-[08:43:24] INFO: Agregando visualizaciones al reporte HTML...
-[08:43:28] INFO:  Reporte HTML generado: reporte.html
+[11:19:22] INFO: Creando reporte HTML con todas las visualizaciones...
+[11:19:22] INFO: Agregando visualizaciones al reporte HTML...
+[11:19:26] INFO:  Reporte HTML generado: reporte.html
 
 ================================================================================
   7. GUARDANDO REPORTE FINAL TXT
@@ -126,7 +126,7 @@
 ================================================================================
 
  Análisis completado exitosamente
-📅 Fecha: 2025-10-05 08:43:28
+📅 Fecha: 2025-10-05 11:19:26
 
 📁 Archivos generados:
    - 🌟 Mapa Central: mapa.html
