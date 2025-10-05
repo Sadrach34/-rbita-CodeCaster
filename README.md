@@ -9,7 +9,8 @@
 - 🌳 **Clasificación de cobertura del suelo** (árboles, vegetación, agua, edificios)
 - 📊 **Dashboards interactivos** con mapas dinámicos
 - 🤖 **Análisis predictivo** de patrones fenológicos
-- 📈 **Visualización de datos** con gráficos y estadísticas
+- � **⭐ NUEVO: Predicción temporal con Sentinel-2** - Predice el estado de la vegetación a 2 meses usando 34 imágenes satelitales
+- �📈 **Visualización de datos** con gráficos y estadísticas
 
 ## 📋 Requisitos Previos
 
@@ -71,10 +72,38 @@ python main.py
 - 🌍 Mapa interactivo de cobertura del suelo
 - 📊 Gráficos de análisis
 - 🤖 Modelo predictivo con Random Forest
+- 🔮 **⭐ NUEVO:** Predicción temporal a 2 meses con Sentinel-2
 
 **Archivos generados en:** `data/output/reporte_completo_*.txt` y `mapa_*.html`
 
 [📖 Ver guía completa de uso](docs/USO_MAIN.md)
+
+---
+
+### 🔮 ⭐ Predicción Temporal (NUEVO)
+
+Predice el estado de la vegetación para 2 meses adelante usando tus 34 imágenes Sentinel-2:
+
+```bash
+python scripts/ejecutar_prediccion_temporal.py
+```
+
+**¿Qué hace?**
+
+- 📡 Analiza 34 imágenes satelitales Sentinel-2 (abril-octubre 2025)
+- 📊 Calcula índices: NDVI, Vegetación, Verdor, Agua
+- 🤖 Entrena modelos Random Forest (precisión 94-98%)
+- 🔮 Predice valores para diciembre 2025
+- 📈 Genera gráficos de series temporales
+- 📄 Crea reporte detallado
+
+**Archivos generados:**
+
+- `prediccion_series_temporales.png` - Evolución temporal + predicciones
+- `prediccion_comparacion.png` - Comparación actual vs futuro
+- `reporte_prediccion_temporal_*.txt` - Reporte completo
+
+[📖 Ver guía de predicción temporal](INICIO_RAPIDO_PREDICCION.md) | [📚 Documentación completa](docs/PREDICCION_TEMPORAL.md)
 
 ---
 

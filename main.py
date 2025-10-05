@@ -22,9 +22,12 @@ from src.utils.data_loader import DataLoader
 from src.analisis_mosquitos import AnalizadorMosquitos
 from src.analisis_cobertura import AnalizadorCobertura
 from src.prediccion import PredictorMosquitos
+from src.prediccion_temporal import PredictorTemporal
+from src.reporte_html import GeneradorReporteHTML
 import folium
 from folium.plugins import HeatMap, MarkerCluster
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class GeneradorReportes:
@@ -46,28 +49,25 @@ class GeneradorReportes:
         self._limpiar_archivos_anteriores()
     
     def _limpiar_archivos_anteriores(self):
-        """Elimina mapas unificados y reportes anteriores."""
-        import glob
+        """Elimina todos los archivos del output excepto .gitkeep."""
+        print("\n🗑️  Limpiando directorio de salida...")
         
-        # Eliminar mapas unificados anteriores
-        mapas_anteriores = list(self.output_dir.glob("mapa_unificado_*.html"))
-        for mapa in mapas_anteriores:
+        archivos_eliminados = 0
+        
+        # Listar todos los archivos en output
+        for archivo in self.output_dir.iterdir():
+            # No eliminar .gitkeep ni directorios
+            if archivo.name == '.gitkeep' or archivo.is_dir():
+                continue
+            
             try:
-                mapa.unlink()
-                print(f"🗑️  Eliminado mapa anterior: {mapa.name}")
+                archivo.unlink()
+                archivos_eliminados += 1
             except Exception as e:
-                print(f"⚠️  No se pudo eliminar {mapa.name}: {e}")
+                print(f"⚠️  No se pudo eliminar {archivo.name}: {e}")
         
-        # Eliminar reportes anteriores
-        reportes_anteriores = list(self.output_dir.glob("reporte_completo_*.txt"))
-        for reporte in reportes_anteriores:
-            try:
-                reporte.unlink()
-                print(f"🗑️  Eliminado reporte anterior: {reporte.name}")
-            except Exception as e:
-                print(f"⚠️  No se pudo eliminar {reporte.name}: {e}")
-        
-        if mapas_anteriores or reportes_anteriores:
+        if archivos_eliminados > 0:
+            print(f"   ✅ Eliminados {archivos_eliminados} archivos anteriores")
             print()  # Línea en blanco para separar
         
     def log(self, mensaje, nivel="INFO"):
@@ -747,11 +747,11 @@ class GeneradorReportes:
         """
         mapa.get_root().html.add_child(folium.Element(leyenda_html))
         
-        # Título
+        # Título con botón al reporte
         titulo_html = """
         <div style="position: fixed; 
                     top: 10px; left: 50px; 
-                    width: 450px; height: auto; 
+                    width: 500px; height: auto; 
                     background-color: rgba(255, 255, 255, 0.95); 
                     border:3px solid #1976D2;
                     border-radius: 8px;
@@ -767,15 +767,35 @@ class GeneradorReportes:
             <p style="margin: 5px 0; font-size: 10px; color: #999;">
                 Usa el control de capas para mostrar/ocultar datos
             </p>
+            <a href="reporte.html" target="_blank" 
+               style="display: inline-block; 
+                      margin-top: 8px; 
+                      padding: 8px 16px; 
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white; 
+                      text-decoration: none; 
+                      border-radius: 5px;
+                      font-weight: bold;
+                      font-size: 12px;
+                      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                      transition: transform 0.2s;">
+                📊 Ver Reporte Detallado
+            </a>
         </div>
+        <style>
+        a[href="reporte.html"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        </style>
         """
         mapa.get_root().html.add_child(folium.Element(titulo_html))
         
         # Control de capas
         folium.LayerControl(collapsed=False, position='topright').add_to(mapa)
         
-        # Guardar mapa
-        archivo_html = self.output_dir / f"mapa_unificado_{self.timestamp}.html"
+        # Guardar mapa como mapa.html (archivo principal)
+        archivo_html = self.output_dir / "mapa.html"
         mapa.save(str(archivo_html))
         
         self.log(f"✅ Mapa unificado guardado: {archivo_html}")
@@ -874,14 +894,188 @@ def main():
         except Exception as e:
             generador.log(f"⚠️  Error en modelo predictivo: {str(e)}", "WARNING")
         
+        # 4B. PREDICCIÓN TEMPORAL (NUEVO)
+        generador.separador("4B. PREDICCIÓN TEMPORAL A 2 MESES")
+        predictor_temporal = None
+        resumen_prediccion = None
+        
+        try:
+            predictor_temporal = PredictorTemporal(directorio_geojson="data/raw")
+            resumen_prediccion = predictor_temporal.ejecutar_analisis_completo(meses_adelante=2)
+            
+            if resumen_prediccion:
+                generador.reporte_txt.append("\n🔮 PREDICCIÓN TEMPORAL (2 MESES):\n")
+                generador.reporte_txt.append("-" * 80 + "\n")
+                generador.reporte_txt.append(f"   Periodo analizado: {resumen_prediccion['fecha_inicio']} a {resumen_prediccion['fecha_fin']}\n")
+                generador.reporte_txt.append(f"   Predicción hasta: {resumen_prediccion['fecha_prediccion']}\n")
+                generador.reporte_txt.append(f"   Observaciones: {resumen_prediccion['n_observaciones']}\n")
+                
+                generador.reporte_txt.append("\n   Precisión de modelos:\n")
+                for metrica, info in resumen_prediccion['modelos'].items():
+                    calidad = "Excelente" if info['r2'] > 0.9 else "Bueno" if info['r2'] > 0.7 else "Aceptable"
+                    generador.reporte_txt.append(f"      • {metrica}: R² = {info['r2']:.4f} ({calidad})\n")
+                
+                generador.log("✅ Predicción temporal completada")
+            else:
+                generador.log("⚠️  No se pudieron generar predicciones temporales", "WARNING")
+                
+        except Exception as e:
+            generador.log(f"⚠️  Error en predicción temporal: {str(e)}", "WARNING")
+            import traceback
+            traceback.print_exc()
+        
         # 5. GENERAR MAPA UNIFICADO
         generador.separador("5. GENERANDO MAPA UNIFICADO")
         
         # Solo generar el mapa unificado (los 3 en 1)
         mapa_unificado = generador.crear_mapa_unificado(df_mosquitos, df_imagery, df_landcover)
         
-        # 6. GUARDAR REPORTE FINAL
-        generador.separador("6. GUARDANDO REPORTE FINAL")
+        # 6. GENERAR REPORTE HTML INTERACTIVO
+        generador.separador("6. GENERANDO REPORTE HTML INTERACTIVO")
+        reporte_html_path = None
+        
+        if predictor_temporal and resumen_prediccion:
+            try:
+                generador.log("Creando reporte HTML con todas las visualizaciones...")
+                
+                reporte_html = GeneradorReporteHTML("Reporte Completo - Orbita CodeCaster")
+                
+                # Agregar métricas principales
+                reporte_html.agregar_metrica(
+                    "Archivos GeoJSON",
+                    str(resumen_prediccion['n_observaciones']),
+                    "Imágenes Sentinel-2 procesadas",
+                    "📁"
+                )
+                
+                reporte_html.agregar_metrica(
+                    "Reportes de Mosquitos",
+                    str(len(df_mosquitos)),
+                    "Observaciones de campo",
+                    "🦟"
+                )
+                
+                reporte_html.agregar_metrica(
+                    "Periodo Analizado",
+                    f"{resumen_prediccion['fecha_inicio']} a {resumen_prediccion['fecha_fin']}",
+                    "Rango de fechas",
+                    "📅"
+                )
+                
+                # Calcular R² promedio
+                r2_promedio = sum(m['r2'] for m in resumen_prediccion['modelos'].values()) / len(resumen_prediccion['modelos'])
+                reporte_html.agregar_metrica(
+                    "Precisión Promedio",
+                    f"{r2_promedio:.1%}",
+                    "R² de modelos predictivos",
+                    "🎯"
+                )
+                
+                # Agregar sección de resumen
+                reporte_html.agregar_seccion(
+                    "📋 Resumen Ejecutivo",
+                    f"""
+                    Este reporte integra el análisis completo del proyecto Orbita-CodeCaster, incluyendo:
+                    <br><br>
+                    <b>🦟 Análisis de Mosquitos:</b> {len(df_mosquitos)} reportes de campo analizados
+                    <br>
+                    <b>🌍 Cobertura del Suelo:</b> {len(df_imagery)} observaciones de cobertura
+                    <br>
+                    <b>🌿 Vegetación:</b> {len(df_landcover)} puntos de cobertura terrestre
+                    <br>
+                    <b>🔮 Predicción Temporal:</b> Proyecciones hasta {resumen_prediccion['fecha_prediccion']}
+                    <br><br>
+                    Los modelos predictivos analizan datos satelitales Sentinel-2 para anticipar cambios
+                    en vegetación, agua y cobertura terrestre en los próximos 2 meses.
+                    """,
+                    "texto"
+                )
+                
+                # Agregar información de modelos
+                modelos_info = []
+                for metrica, info in resumen_prediccion['modelos'].items():
+                    calidad = "Excelente" if info['r2'] > 0.9 else "Bueno" if info['r2'] > 0.7 else "Aceptable"
+                    modelos_info.append(
+                        f"✓ <b>{metrica.replace('_', ' ').title()}</b>: R² = {info['r2']:.4f} ({calidad}) | RMSE = {info['rmse']:.4f}"
+                    )
+                
+                reporte_html.agregar_seccion(
+                    "🤖 Modelos Predictivos",
+                    modelos_info,
+                    "lista"
+                )
+                
+                # Agregar gráficos generados
+                generador.log("Agregando visualizaciones al reporte HTML...")
+                
+                for nombre, fig in predictor_temporal.figuras:
+                    if nombre == 'series_temporales':
+                        reporte_html.agregar_grafico(
+                            fig,
+                            "Series Temporales Históricas",
+                            "Análisis de series temporales de todas las métricas espectrales observadas."
+                        )
+                    elif nombre == 'predicciones':
+                        reporte_html.agregar_grafico(
+                            fig,
+                            "Predicciones Temporales a 2 Meses",
+                            "Predicciones futuras basadas en modelos polinomiales con intervalo de confianza del ±10%."
+                        )
+                    elif nombre == 'cambios':
+                        reporte_html.agregar_grafico(
+                            fig,
+                            "Análisis de Cambios Esperados",
+                            "Cambios proyectados en las métricas principales para los próximos 2 meses."
+                        )
+                    
+                    plt.close(fig)
+                
+                # Agregar conclusiones
+                ultimo_hist = predictor_temporal.df_temporal.iloc[-1]
+                ultima_pred = predictor_temporal.predicciones.iloc[-1]
+                
+                cambio_veg = ultima_pred['vegetation_pct'] - ultimo_hist['vegetation_pct']
+                cambio_agua = ultima_pred['water_pct'] - ultimo_hist['water_pct']
+                
+                tendencia_veg = "aumentará" if cambio_veg > 0 else "disminuirá"
+                tendencia_agua = "aumentará" if cambio_agua > 0 else "disminuirá"
+                
+                conclusiones = f"""
+                <div class="alerta info">
+                    <span style="font-size: 2em;">ℹ️</span>
+                    <div>
+                        <strong>Conclusiones Principales:</strong><br>
+                        • La vegetación {tendencia_veg} aproximadamente {abs(cambio_veg):.1f}% en los próximos 2 meses<br>
+                        • La presencia de agua {tendencia_agua} alrededor de {abs(cambio_agua):.3f}%<br>
+                        • Se analizaron {len(df_mosquitos)} reportes de mosquitos en la zona<br>
+                        • Precisión promedio de modelos: {r2_promedio:.1%}<br>
+                        • Se recomienda monitoreo continuo para validar predicciones
+                    </div>
+                </div>
+                """
+                
+                reporte_html.agregar_seccion(
+                    "🎯 Conclusiones y Recomendaciones",
+                    conclusiones,
+                    "texto"
+                )
+                
+                # Generar archivo HTML
+                reporte_html_path = reporte_html.generar_html(
+                    str(generador.output_dir / "reporte.html")
+                )
+                
+                generador.log(f"✅ Reporte HTML generado: reporte.html")
+                
+            except Exception as e:
+                generador.log(f"⚠️  Error generando reporte HTML: {str(e)}", "WARNING")
+                import traceback
+                traceback.print_exc()
+        else:
+            generador.log("⚠️  No se generó reporte HTML (predicción temporal no disponible)", "WARNING")
+        
+        # 7. GUARDAR REPORTE FINAL TXT
+        generador.separador("7. GUARDANDO REPORTE FINAL TXT")
         
         generador.reporte_txt.append("\n" + "=" * 80 + "\n")
         generador.reporte_txt.append("  📋 RESUMEN FINAL\n")
@@ -889,8 +1083,10 @@ def main():
         generador.reporte_txt.append(f"\n✅ Análisis completado exitosamente\n")
         generador.reporte_txt.append(f"📅 Fecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         generador.reporte_txt.append(f"\n📁 Archivos generados:\n")
-        generador.reporte_txt.append(f"   - 🌟 Mapa UNIFICADO: {mapa_unificado.name}\n")
-        generador.reporte_txt.append(f"   - Gráficos: Ver carpeta {generador.output_dir}/\n")
+        generador.reporte_txt.append(f"   - 🌟 Mapa Central: mapa.html\n")
+        if reporte_html_path:
+            generador.reporte_txt.append(f"   - 🌐 Reporte HTML: reporte.html\n")
+        generador.reporte_txt.append(f"   - 📊 Gráficos: Ver carpeta {generador.output_dir}/\n")
         
         archivo_reporte = generador.guardar_reporte_txt()
         
@@ -899,11 +1095,33 @@ def main():
         print("  ✅ ANÁLISIS COMPLETADO EXITOSAMENTE")
         print("=" * 80)
         print(f"\n📁 Todos los archivos se guardaron en: {generador.output_dir}/")
-        print(f"\n📄 Reporte completo: {archivo_reporte}")
-        print(f"\n🌟 ⭐ MAPA UNIFICADO (Mosquitos 🦟 + Cobertura 🌍 + Plantas 🌿):")
+        print(f"\n📄 Reporte TXT: {archivo_reporte}")
+        
+        print(f"\n🗺️ ⭐ ARCHIVO CENTRAL - MAPA INTERACTIVO:")
         print(f"   {mapa_unificado}")
-        print("\n🌐 Abre el archivo HTML en tu navegador para ver el mapa interactivo")
-        print("💡 TIP: Usa el control de capas para mostrar/ocultar diferentes tipos de datos")
+        print(f"   👉 Este es tu punto de entrada principal")
+        print(f"   💡 Comando para abrir:")
+        print(f"      xdg-open {mapa_unificado}")
+        
+        if reporte_html_path:
+            print(f"\n📊 REPORTE COMPLETO:")
+            print(f"   {reporte_html_path}")
+            print(f"   👉 Accesible desde el botón en mapa.html")
+            print(f"   • Visualizaciones embebidas de alta calidad")
+            print(f"   • Gráficos de series temporales y predicciones")
+            print(f"   • Métricas y conclusiones automáticas")
+        
+        print(f"\n� ARCHIVOS ADICIONALES:")
+        print(f"   • Series temporales (series_temporales.png)")
+        print(f"   • Predicciones futuras (predicciones_temporales.png)")
+        print(f"   • Análisis de cambios (analisis_cambios.png)")
+        print(f"   • Datos CSV (predicciones_futuras.csv)")
+        
+        print("\n💡 TIPS:")
+        print("   • Abre mapa.html en tu navegador - es tu archivo principal")
+        print("   • Usa el botón 'Ver Reporte Completo' para estadísticas detalladas")
+        print("   • Los archivos HTML son autocontenidos - compártelos por email")
+        print("   • Usa Ctrl+P en el navegador para exportar a PDF")
         print("=" * 80 + "\n")
         
     except Exception as e:
