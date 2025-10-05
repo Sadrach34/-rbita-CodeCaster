@@ -1,16 +1,61 @@
 # 🌍 Orbita-CodeCaster
 
-**ÓRBITA (Codecasters)** es una plataforma de análisis geoespacial para el desafío NASA Bloomwatch. Monitorea y predice floraciones globales usando datos de observación terrestre de la NASA, integrando análisis de cobertura del suelo y hábitats de mosquitos con datos ciudadanos de GLOBE Observer.
+**ÓRBITA (Codecasters)** is a geospatial analysis platform for NASA's Bloomwatch challenge. It monitors and predicts global blooms using NASA Earth observation data, integrating land cover analysis and mosquito habitat data with GLOBE Observer citizen science data.
 
-## 🚀 Características
+## 🚀 Features
 
-- 🗺️ **Visualización de floraciones** con imágenes satelitales NASA GIBS (MODIS NDVI)
-- 🦟 **Análisis de hábitats de mosquitos** usando datos de GLOBE Observer
-- 🌳 **Clasificación de cobertura del suelo** (árboles, vegetación, agua, edificios)
-- 📊 **Dashboards interactivos** con mapas dinámicos
-- 🤖 **Análisis predictivo** de patrones fenológicos
-- � **⭐ NUEVO: Predicción temporal con Sentinel-2** - Predice el estado de la vegetación a 2 meses usando 34 imágenes satelitales
-- �📈 **Visualización de datos** con gráficos y estadísticas
+- 🗺️ **Bloom visualization** with NASA GIBS satellite imagery (MODIS NDVI)
+- 🦟 **Mosquito habitat analysis** using GLOBE Observer data
+- 🌳 **Land cover classification** (trees, vegetation, water, buildings)
+- 📊 **Interactive dashboards** with dynamic maps
+- 🤖 **Predictive analysis** of phenological patterns
+- ⭐ **NEW: Temporal prediction with Sentinel-2** - Predicts vegetation state 2 months ahead using 45+ satellite images
+- 📈 **Data visualization** with charts and statistics
+- 📄 **Interactive HTML reports** with embedded graphics and Folium maps
+
+## 📚 Complete Documentation
+
+This project has **comprehensive documentation** covering all aspects of the system:
+
+### 📖 Main Documentation
+
+The documentation is divided into two sections:
+
+**For General Users** (non-technical, easy-to-follow guides):
+
+- **[docs/USER_GUIDE/](docs/USER_GUIDE/README.md)** - Complete user guide with:
+  - Getting Started - Installation and setup
+  - Basic Usage - Running analyses step-by-step
+  - Understanding Results - Interpreting outputs
+  - FAQ - Common problems and solutions
+
+**For Engineers and Developers** (highly technical reference):
+
+- **[docs/TECHNICAL/](docs/TECHNICAL/)** - Technical documentation including:
+  - Architecture - System design and patterns
+  - Analysis Modules - Detailed algorithm documentation
+  - Prediction System - ML models and mathematical foundations
+  - Data Structures - Complete schemas and validation
+  - API Reference - Method signatures and examples
+
+### 📘 Quick Start Guides (Legacy)
+
+- **[docs/USO_MAIN.md](docs/USO_MAIN.md)** - Using the main script
+- **[docs/PREDICCION_TEMPORAL.md](docs/PREDICCION_TEMPORAL.md)** - Temporal prediction with Sentinel-2
+- **[docs/VER_REPORTE.md](docs/VER_REPORTE.md)** - Viewing reports
+- **[docs/REPORTE_HTML.md](docs/REPORTE_HTML.md)** - Generating HTML reports
+
+### 🎯 Where to Start?
+
+| If you want to...                  | Read this                                                                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Install and use the system**     | [USER_GUIDE/01_GETTING_STARTED.md](docs/USER_GUIDE/01_GETTING_STARTED.md)                                                             |
+| **Run analyses**                   | [USER_GUIDE/02_BASIC_USAGE.md](docs/USER_GUIDE/02_BASIC_USAGE.md)                                                                     |
+| **Understand results**             | [USER_GUIDE/03_UNDERSTANDING_RESULTS.md](docs/USER_GUIDE/03_UNDERSTANDING_RESULTS.md)                                                 |
+| **Understand system architecture** | [TECHNICAL/01_ARCHITECTURE.md](docs/TECHNICAL/01_ARCHITECTURE.md)                                                                     |
+| **Understand data formats**        | [TECHNICAL/04_DATA_STRUCTURES.md](docs/TECHNICAL/04_DATA_STRUCTURES.md)                                                               |
+| **Understand ML algorithms**       | [TECHNICAL/03_PREDICTION_SYSTEM.md](docs/TECHNICAL/03_PREDICTION_SYSTEM.md)                                                           |
+| **Develop new features**           | [TECHNICAL/02_ANALYSIS_MODULES.md](docs/TECHNICAL/02_ANALYSIS_MODULES.md) + [05_API_REFERENCE.md](docs/TECHNICAL/05_API_REFERENCE.md) |
 
 ## 📋 Requisitos Previos
 
