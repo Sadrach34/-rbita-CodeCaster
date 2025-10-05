@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div
         style={{
-          width: "193vh",
+          width: "202vh",
           height: "1000px",
           display: "flex",
           // marginTop: '85vh'
