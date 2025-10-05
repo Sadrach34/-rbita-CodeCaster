@@ -1,0 +1,73 @@
+/* Fondo oscuro que cubre la pantalla */
+.container-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16rem;
+  height: 100vh;
+  background-image: linear-gradient(to top, #6627EA 50%, #764BA2  100%);
+  color: rgb(34, 33, 33);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 50;
+  padding: 2rem 1rem;
+}
+
+/* Cuando está abierto */
+.container-menu.open {
+  transform: translateX(0);
+}
+
+/* Contenido del menú */
+.cont-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cont-menu nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+
+.cont-menu nav a:hover {
+  color: #00aaff;
+}
+
+/* Botón de abrir */
+.open-menu-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: rgb(12, 12, 12);
+  cursor: pointer;
+  z-index: 100;
+  transition: opacity 0.3s ease;
+}
+
+/* Botón de cerrar */
+.close-menu {
+  font-size: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  height: 1rem;
+  width: auto;
+  line-height: 2rem;
+  border-radius: 50%
+  
+}
+
+
+
