@@ -65,6 +65,7 @@ python main.py
 ```
 
 **Esto generará automáticamente:**
+
 - 📄 Reporte completo en TXT con todas las estadísticas
 - 🗺️ Mapa interactivo de mosquitos (HeatMap + Clusters)
 - 🌍 Mapa interactivo de cobertura del suelo
@@ -84,6 +85,7 @@ python scripts/generar_mapa_floraciones.py
 ```
 
 Esto creará un archivo HTML en `data/output/floraciones.html` con:
+
 - Mapa base de México
 - Capa de NDVI satelital de NASA GIBS
 - Marcadores de detecciones de floración

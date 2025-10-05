@@ -11,17 +11,20 @@ El script `main.py` ejecuta un análisis completo de los datos del proyecto, gen
 El script realiza los siguientes análisis automáticamente:
 
 ### 1️⃣ **Carga de Datos**
+
 - Lee los 3 archivos CSV de GLOBE Observer
 - Procesa y valida los datos
 - Genera estadísticas básicas
 
 ### 2️⃣ **Análisis de Mosquitos** 🦟
+
 - Especies de mosquitos reportadas (Aedes, Culex, Anopheles)
 - Fuentes de agua más comunes
 - Distribución temporal de reportes
 - Mapa de calor interactivo
 
 ### 3️⃣ **Análisis de Cobertura del Suelo** 🌍
+
 - Promedios de cada tipo de cobertura:
   - Árboles
   - Arbustos
@@ -33,11 +36,13 @@ El script realiza los siguientes análisis automáticamente:
 - Mapa interactivo de observaciones
 
 ### 4️⃣ **Modelo Predictivo** 🤖
+
 - Entrena un modelo de Machine Learning (Random Forest)
 - Predice áreas propensas a mosquitos basándose en cobertura del suelo
 - Reporta precisión del modelo
 
 ### 5️⃣ **Generación de Reportes** 📄
+
 - Reporte completo en formato TXT
 - 2 mapas interactivos en HTML
 - Gráficos en PNG
@@ -82,12 +87,14 @@ data/output/
 ### 📄 Reporte TXT
 
 Contiene:
+
 - Estadísticas de mosquitos (especies, fuentes de agua, temporalidad)
 - Promedios de cobertura del suelo
 - Precisión del modelo predictivo
 - Resumen de mapas generados
 
 **Ejemplo:**
+
 ```
 ================================================================================
   2. ANÁLISIS DE MOSQUITOS
@@ -107,12 +114,14 @@ Contiene:
 ### 🗺️ Mapas HTML
 
 **Mapa de Mosquitos:**
+
 - Mapa de calor (HeatMap) de reportes
 - Cluster de marcadores por ubicación
 - Popup con información detallada de cada reporte
 - Capas interactivas (mapa base + calor)
 
 **Mapa de Cobertura:**
+
 - Marcadores de observaciones
 - Colores según tipo de cobertura dominante
 - Círculos de tamaño proporcional a cobertura de árboles

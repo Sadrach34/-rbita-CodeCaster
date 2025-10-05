@@ -6,8 +6,9 @@
 ================================================================================
   1. CARGANDO DATOS
 ================================================================================
-[17:15:41] INFO: ✅ Datos de mosquitos: 534 registros
-[17:15:41] INFO: ✅ Datos de imagery: 1800 registros
+[18:19:07] INFO: ✅ Datos de mosquitos: 534 registros
+[18:19:07] INFO: ✅ Datos de imagery: 1800 registros
+[18:19:07] INFO: ✅ Datos de cobertura terrestre (plantas): 1047 registros
 
 ================================================================================
   2. ANÁLISIS DE MOSQUITOS
@@ -32,7 +33,7 @@
    - puddle or still water next to a creek, stream or river: 21 reportes
    - animal trough or water bowl: 12 reportes
    - puddle, vehhicle or animal tracks: 10 reportes
-[17:15:41] INFO: Analizando datos temporales...
+[18:19:07] INFO: Analizando datos temporales...
 
 📅 Reportes por mes:
    Mes 6: 292 reportes
@@ -50,7 +51,7 @@
    ceoBuilding: 12.45%
    ceoImperviousSurface: 19.57%
    ceoWaterLakePondedContainer: 0.99%
-[17:15:42] INFO: Análisis de cobertura completado
+[18:19:08] INFO: Análisis de cobertura completado
 
 ================================================================================
   4. MODELO PREDICTIVO
@@ -61,30 +62,35 @@
    Precisión del modelo: 100.00%
    Algoritmo: Random Forest
    Variable objetivo: Presencia de agua
-[17:15:43] INFO: ✅ Modelo entrenado con precisión: 100.00%
+[18:19:08] INFO: ✅ Modelo entrenado con precisión: 100.00%
 
 ================================================================================
-  5. GENERANDO MAPAS INTERACTIVOS
+  5. GENERANDO MAPA UNIFICADO
 ================================================================================
 
 ================================================================================
-  GENERANDO MAPA DE MOSQUITOS
+  GENERANDO MAPA UNIFICADO
 ================================================================================
-[17:15:43] INFO: Procesando 534 reportes con coordenadas válidas
-[17:15:45] INFO: ✅ Mapa de mosquitos guardado: data/output/mapa_mosquitos_20251004_171540.html
+[18:19:08] INFO: Centro del mapa unificado: (35.3750, -92.3905)
+[18:19:08] INFO: Agregando capa de mosquitos...
+[18:19:09] INFO: Agregando capa de cobertura del suelo...
+[18:19:09] INFO: Agregando capa de plantas y vegetación...
+[18:19:09] INFO:   - Trees: 88 puntos
+[18:19:09] INFO:   - Shrubs: 2 puntos
+[18:19:09] INFO:   - Herbaceous: 76 puntos
+[18:19:09] INFO:   - Urban: 202 puntos
+[18:19:09] INFO:   - Barren: 14 puntos
+[18:19:09] INFO:   - Water: 4 puntos
+[18:19:09] INFO:   - Other: 661 puntos
+[18:19:12] INFO: ✅ Mapa unificado guardado: data/output/mapa_unificado_20251004_181907.html
 
-📍 Mapa interactivo: data/output/mapa_mosquitos_20251004_171540.html
-   Centro del mapa: (33.5380, -92.0092)
-   Total de puntos: 534
-
-================================================================================
-  GENERANDO MAPA DE COBERTURA DEL SUELO
-================================================================================
-[17:15:45] INFO: Procesando 1800 observaciones de cobertura
-[17:15:45] INFO: ✅ Mapa de cobertura guardado: data/output/mapa_cobertura_20251004_171540.html
-
-🌍 Mapa de cobertura: data/output/mapa_cobertura_20251004_171540.html
-   Áreas con agua detectadas: 58
+🗺️ MAPA UNIFICADO: data/output/mapa_unificado_20251004_181907.html
+   Centro: (35.3750, -92.3905)
+   📊 Capas incluidas:
+      - Mosquitos: 534 puntos
+      - Cobertura: 1800 puntos
+      - Vegetación: 1047 puntos
+      - Mapas de calor: 2 capas
 
 ================================================================================
   6. GUARDANDO REPORTE FINAL
@@ -95,9 +101,8 @@
 ================================================================================
 
 ✅ Análisis completado exitosamente
-📅 Fecha: 2025-10-04 17:15:45
+📅 Fecha: 2025-10-04 18:19:12
 
 📁 Archivos generados:
-   - Mapa de mosquitos: mapa_mosquitos_20251004_171540.html
-   - Mapa de cobertura: mapa_cobertura_20251004_171540.html
+   - 🌟 Mapa UNIFICADO: mapa_unificado_20251004_181907.html
    - Gráficos: Ver carpeta data/output/
