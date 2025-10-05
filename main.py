@@ -15,6 +15,10 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
+# Configure matplotlib to use non-interactive backend before any other imports
+import matplotlib
+matplotlib.use('Agg')
+
 # Añadir src al path
 sys.path.insert(0, str(Path(__file__).parent))
 

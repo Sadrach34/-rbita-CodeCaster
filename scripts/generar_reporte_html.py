@@ -6,6 +6,10 @@ Ejecutar: python scripts/generar_reporte_html.py
 import sys
 from pathlib import Path
 
+# Configure matplotlib before any other imports
+import matplotlib
+matplotlib.use('Agg')
+
 # Añadir src al path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 

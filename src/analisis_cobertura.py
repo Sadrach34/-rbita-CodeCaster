@@ -3,6 +3,8 @@ Módulo de análisis de cobertura del suelo.
 Analiza datos de land cover e imagery con visualizaciones.
 """
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np

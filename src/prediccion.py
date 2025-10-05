@@ -4,6 +4,8 @@ Modelos de Machine Learning para predecir áreas propensas a mosquitos.
 """
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend to prevent tkinter errors
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path

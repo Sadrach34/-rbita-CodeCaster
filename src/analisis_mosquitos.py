@@ -3,6 +3,8 @@ Módulo de análisis de datos de mosquitos.
 Incluye estadísticas, visualizaciones y mapas de calor.
 """
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import folium
