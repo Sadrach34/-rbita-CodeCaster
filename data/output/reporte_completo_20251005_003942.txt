@@ -1,0 +1,134 @@
+
+================================================================================
+  INICIANDO ANÁLISIS
+================================================================================
+
+================================================================================
+  1. CARGANDO DATOS
+================================================================================
+[00:39:42] INFO: ✅ Datos de mosquitos: 534 registros
+[00:39:42] INFO: ✅ Datos de imagery: 1800 registros
+[00:39:42] INFO: ✅ Datos de cobertura terrestre (plantas): 1047 registros
+
+================================================================================
+  2. ANÁLISIS DE MOSQUITOS
+================================================================================
+
+📊 ESTADÍSTICAS DE MOSQUITOS:
+--------------------------------------------------------------------------------
+
+🦟 Especies reportadas:
+   - Aedes: 9 reportes
+   - Culex: 7 reportes
+   - Anopheles: 3 reportes
+
+💧 Fuentes de agua más comunes:
+   - ovitrap: 125 reportes
+   - adult mosquito trap: 104 reportes
+   - cement, metal or plastic tank: 71 reportes
+   - pond: 47 reportes
+   - other: 38 reportes
+   - ditch: 36 reportes
+   - lake: 21 reportes
+   - puddle or still water next to a creek, stream or river: 21 reportes
+   - animal trough or water bowl: 12 reportes
+   - puddle, vehhicle or animal tracks: 10 reportes
+[00:39:42] INFO: Analizando datos temporales...
+
+📅 Reportes por mes:
+   Mes 6: 292 reportes
+   Mes 7: 242 reportes
+
+================================================================================
+  3. ANÁLISIS DE COBERTURA DEL SUELO
+================================================================================
+
+🌳 PROMEDIOS DE COBERTURA DEL SUELO:
+--------------------------------------------------------------------------------
+   ceoTREES_CANOPYCOVER: 33.02%
+   ceoBUSH_SCRUB: 1.93%
+   ceoGRASS: 16.13%
+   ceoBuilding: 12.45%
+   ceoImperviousSurface: 19.57%
+   ceoWaterLakePondedContainer: 0.99%
+[00:39:43] INFO: Análisis de cobertura completado
+
+================================================================================
+  4. MODELO PREDICTIVO
+================================================================================
+
+🤖 MODELO PREDICTIVO:
+--------------------------------------------------------------------------------
+   Precisión del modelo: 100.00%
+   Algoritmo: Random Forest
+   Variable objetivo: Presencia de agua
+[00:39:43] INFO: ✅ Modelo entrenado con precisión: 100.00%
+
+================================================================================
+  4B. PREDICCIÓN TEMPORAL A 2 MESES
+================================================================================
+
+🔮 PREDICCIÓN TEMPORAL (2 MESES):
+--------------------------------------------------------------------------------
+   Periodo analizado: 2025-04-10 a 2025-10-02
+   Predicción hasta: 2025-11-26
+   Observaciones: 66
+
+   Precisión de modelos:
+      • vegetation_pct: R² = 0.8754 (Bueno)
+      • not_vegetated_pct: R² = 0.8439 (Bueno)
+      • water_pct: R² = 0.5784 (Aceptable)
+      • cloud_cover: R² = 0.0424 (Aceptable)
+      • snow_ice_pct: R² = 1.0000 (Excelente)
+[00:39:49] INFO: ✅ Predicción temporal completada
+
+================================================================================
+  5. GENERANDO MAPA UNIFICADO
+================================================================================
+
+================================================================================
+  GENERANDO MAPA UNIFICADO
+================================================================================
+[00:39:49] INFO: Centro del mapa unificado: (35.3750, -92.3905)
+[00:39:49] INFO: Agregando capa de mosquitos...
+[00:39:49] INFO: Agregando capa de cobertura del suelo...
+[00:39:49] INFO: Agregando capa de plantas y vegetación...
+[00:39:49] INFO:   - Trees: 88 puntos
+[00:39:49] INFO:   - Shrubs: 2 puntos
+[00:39:49] INFO:   - Herbaceous: 76 puntos
+[00:39:49] INFO:   - Urban: 202 puntos
+[00:39:49] INFO:   - Barren: 14 puntos
+[00:39:49] INFO:   - Water: 4 puntos
+[00:39:49] INFO:   - Other: 661 puntos
+[00:39:52] INFO: ✅ Mapa unificado guardado: data/output/mapa.html
+
+🗺️ MAPA UNIFICADO: data/output/mapa.html
+   Centro: (35.3750, -92.3905)
+   📊 Capas incluidas:
+      - Mosquitos: 534 puntos
+      - Cobertura: 1800 puntos
+      - Vegetación: 1047 puntos
+      - Mapas de calor: 2 capas
+
+================================================================================
+  6. GENERANDO REPORTE HTML INTERACTIVO
+================================================================================
+[00:39:52] INFO: Creando reporte HTML con todas las visualizaciones...
+[00:39:52] INFO: Agregando visualizaciones al reporte HTML...
+[00:39:56] INFO: ✅ Reporte HTML generado: reporte.html
+
+================================================================================
+  7. GUARDANDO REPORTE FINAL TXT
+================================================================================
+
+================================================================================
+  📋 RESUMEN FINAL
+================================================================================
+
+✅ Análisis completado exitosamente
+📅 Fecha: 2025-10-05 00:39:56
+
+📁 Archivos generados:
+   - 🌟 Mapa Central: mapa.html
+   - 🌐 Reporte HTML: reporte.html
+   - 📊 Gráficos: Ver carpeta data/output/

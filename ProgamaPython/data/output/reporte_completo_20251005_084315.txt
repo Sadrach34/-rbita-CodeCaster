@@ -6,9 +6,9 @@
 ================================================================================
   1. CARGANDO DATOS
 ================================================================================
-[18:19:07] INFO: ✅ Datos de mosquitos: 534 registros
-[18:19:07] INFO: ✅ Datos de imagery: 1800 registros
-[18:19:07] INFO: ✅ Datos de cobertura terrestre (plantas): 1047 registros
+[08:43:15] INFO: Datos de mosquitos: 534 registros
+[08:43:15] INFO: Datos de imagery: 1800 registros
+[08:43:15] INFO: Datos de cobertura terrestre (plantas): 1047 registros
 
 ================================================================================
   2. ANÁLISIS DE MOSQUITOS
@@ -33,7 +33,7 @@
    - puddle or still water next to a creek, stream or river: 21 reportes
    - animal trough or water bowl: 12 reportes
    - puddle, vehhicle or animal tracks: 10 reportes
-[18:19:07] INFO: Analizando datos temporales...
+[08:43:15] INFO: Analizando datos temporales...
 
 📅 Reportes por mes:
    Mes 6: 292 reportes
@@ -51,7 +51,7 @@
    ceoBuilding: 12.45%
    ceoImperviousSurface: 19.57%
    ceoWaterLakePondedContainer: 0.99%
-[18:19:08] INFO: Análisis de cobertura completado
+[08:43:16] INFO: Análisis de cobertura completado
 
 ================================================================================
   4. MODELO PREDICTIVO
@@ -62,29 +62,47 @@
    Precisión del modelo: 100.00%
    Algoritmo: Random Forest
    Variable objetivo: Presencia de agua
-[18:19:08] INFO: ✅ Modelo entrenado con precisión: 100.00%
+[08:43:16] INFO: Modelo entrenado con precisión: 100.00%
 
 ================================================================================
-  5. GENERANDO MAPA UNIFICADO
+  4B. PREDICCIÓN TEMPORAL A 2 MESES
+================================================================================
+
+ PREDICCIÓN TEMPORAL (2 MESES):
+--------------------------------------------------------------------------------
+   Periodo analizado: 2025-04-10 a 2025-10-02
+   Predicción hasta: 2025-11-26
+   Observaciones: 66
+
+   Precisión de modelos:
+      • vegetation_pct: R² = 0.8754 (Bueno)
+      • not_vegetated_pct: R² = 0.8439 (Bueno)
+      • water_pct: R² = 0.5784 (Aceptable)
+      • cloud_cover: R² = 0.0424 (Aceptable)
+      • snow_ice_pct: R² = 1.0000 (Excelente)
+[08:43:22] INFO:  Predicción temporal completada
+
+================================================================================
+  5. GENERANDO MAPA
 ================================================================================
 
 ================================================================================
-  GENERANDO MAPA UNIFICADO
+  GENERANDO MAPA
 ================================================================================
-[18:19:08] INFO: Centro del mapa unificado: (35.3750, -92.3905)
-[18:19:08] INFO: Agregando capa de mosquitos...
-[18:19:09] INFO: Agregando capa de cobertura del suelo...
-[18:19:09] INFO: Agregando capa de plantas y vegetación...
-[18:19:09] INFO:   - Trees: 88 puntos
-[18:19:09] INFO:   - Shrubs: 2 puntos
-[18:19:09] INFO:   - Herbaceous: 76 puntos
-[18:19:09] INFO:   - Urban: 202 puntos
-[18:19:09] INFO:   - Barren: 14 puntos
-[18:19:09] INFO:   - Water: 4 puntos
-[18:19:09] INFO:   - Other: 661 puntos
-[18:19:12] INFO: ✅ Mapa unificado guardado: data/output/mapa_unificado_20251004_181907.html
+[08:43:22] INFO: Centro del mapa: (35.3750, -92.3905)
+[08:43:22] INFO: Agregando capa de mosquitos...
+[08:43:22] INFO: Agregando capa de cobertura del suelo...
+[08:43:22] INFO: Agregando capa de plantas y vegetación...
+[08:43:22] INFO:   - Trees: 88 puntos
+[08:43:22] INFO:   - Shrubs: 2 puntos
+[08:43:22] INFO:   - Herbaceous: 76 puntos
+[08:43:22] INFO:   - Urban: 202 puntos
+[08:43:22] INFO:   - Barren: 14 puntos
+[08:43:22] INFO:   - Water: 4 puntos
+[08:43:22] INFO:   - Other: 661 puntos
+[08:43:24] INFO:  Mapa guardado: data/output/mapa.html
 
-🗺️ MAPA UNIFICADO: data/output/mapa_unificado_20251004_181907.html
+ Mapa interactivo: data/output/mapa.html
    Centro: (35.3750, -92.3905)
    📊 Capas incluidas:
       - Mosquitos: 534 puntos
@@ -93,16 +111,24 @@
       - Mapas de calor: 2 capas
 
 ================================================================================
-  6. GUARDANDO REPORTE FINAL
+  6. GENERANDO REPORTE HTML INTERACTIVO
+================================================================================
+[08:43:24] INFO: Creando reporte HTML con todas las visualizaciones...
+[08:43:24] INFO: Agregando visualizaciones al reporte HTML...
+[08:43:28] INFO:  Reporte HTML generado: reporte.html
+
+================================================================================
+  7. GUARDANDO REPORTE FINAL TXT
 ================================================================================
 
 ================================================================================
   📋 RESUMEN FINAL
 ================================================================================
 
-✅ Análisis completado exitosamente
-📅 Fecha: 2025-10-04 18:19:12
+ Análisis completado exitosamente
+📅 Fecha: 2025-10-05 08:43:28
 
 📁 Archivos generados:
-   - 🌟 Mapa UNIFICADO: mapa_unificado_20251004_181907.html
-   - Gráficos: Ver carpeta data/output/
+   - 🌟 Mapa Central: mapa.html
+   - 🌐 Reporte HTML: reporte.html
+   - 📊 Gráficos: Ver carpeta data/output/
